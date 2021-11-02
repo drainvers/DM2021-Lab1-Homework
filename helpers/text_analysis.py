@@ -15,7 +15,7 @@ def get_tokens_and_frequency(token_list):
     return tokens, tokens_count
 
 def compute_frequencies(train_data, emotion, feature, frequency=True):
-    """ compute word frequency for pandas datafram column of lists"""
+    """ compute word frequency for pandas dataframe column of lists"""
     tokens =  train_data.loc[(train_data["emotions"] == emotion)][feature].values.tolist()
     tokens = [item for l in tokens for item in l]
     if frequency:
@@ -85,8 +85,8 @@ def get_trace(X_pca, data, category, color):
     """ Build trace for plotly chart based on category """
     trace = go.Scatter3d(
         x=X_pca[data.apply(lambda x: True if x==category else False), 0],
-        y=X_pca[data.apply(lambda x: True if x==category else False),1],
-        z=X_pca[data.apply(lambda x: True if x==category else False),2],
+        y=X_pca[data.apply(lambda x: True if x==category else False), 1],
+        z=X_pca[data.apply(lambda x: True if x==category else False), 2],
         mode='markers',
         marker=dict(
             size=4,
@@ -102,8 +102,8 @@ def get_trace(X_pca, data, category, color):
 
 def plot_word_cloud(text):
     """ Generate word cloud given some input text doc """
-    word_cloud = WordCloud().generate(text)
-    plt.figure(figsize=(8,6), dpi=90)
+    word_cloud = WordCloud(background_color='white', width=2048, height=1280).generate(text)
+    plt.figure(figsize=(16,12), dpi=150)
     plt.imshow(word_cloud, interpolation='bilinear')
     plt.axis("off")
     plt.show()

@@ -31,8 +31,18 @@ def tokenize_text(text, remove_stopwords=False):
     Tokenize text using the nltk library
     """
     tokens = []
-    for d in nltk.sent_tokenize(text, language='english'):
-        for word in nltk.word_tokenize(d, language='english'):
-            # filters here
-            tokens.append(word)
+    stop_words = set(nltk.corpus.stopwords.words('english'))
+    
+    if remove_stopwords:
+        for d in nltk.sent_tokenize(text, language='english'):
+            for word in nltk.word_tokenize(d, language='english'):
+                # filters here
+                if word.lower() not in stop_words:
+                    tokens.append(word)
+    else:
+        for d in nltk.sent_tokenize(text, language='english'):
+            for word in nltk.word_tokenize(d, language='english'):
+                # filters here
+                tokens.append(word)
+        
     return tokens
